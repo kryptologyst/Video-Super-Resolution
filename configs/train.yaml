@@ -1,0 +1,46 @@
+# Training configuration for video super-resolution
+
+# Model configuration
+model:
+  name: "srcnn"  # Options: srcnn, vdsr, edvr, basicvsr++
+  channels: 3
+  scale_factor: 2
+  num_frames: 5  # For multi-frame models
+
+# Data configuration
+data:
+  train_samples: 1000
+  val_samples: 200
+  patch_size: 64
+  augment: true
+  num_workers: 4
+
+# Training configuration
+training:
+  epochs: 100
+  batch_size: 4
+  learning_rate: 1e-4
+  weight_decay: 1e-4
+  lr_step_size: 30
+  lr_gamma: 0.5
+
+# Loss configuration
+loss:
+  charbonnier_weight: 1.0
+  perceptual_weight: 0.1
+  temporal_weight: 0.1
+  use_perceptual: true
+  use_temporal: true
+
+# Device configuration
+device: "auto"  # Options: auto, cuda, mps, cpu
+
+# Logging and checkpointing
+logging:
+  log_dir: "logs"
+  checkpoint_dir: "checkpoints"
+  save_freq: 10
+  log_freq: 100
+
+# Random seed
+seed: 42
